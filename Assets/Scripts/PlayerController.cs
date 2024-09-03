@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score : " + score.ToString();
-        if (score >= 20)
+        if (score == 999)
         {
             winText.gameObject.SetActive(true);
         }
@@ -63,10 +63,17 @@ public class PlayerController : MonoBehaviour
 
             SetScoreText();
         }
+        else if (other.gameObject.CompareTag("PickupLast"))
+        {
+            other.gameObject.SetActive(false);
+            score = 999;
+
+            SetScoreText();
+        }
         else if (other.gameObject.CompareTag("Bomb"))
         {
             other.gameObject.SetActive(false);
-            score--;
+            score -= 10;
 
             SetScoreText();
         }
